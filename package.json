@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "canvas": "^2.9.1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "scripts" : {
+    "dev": "nodemon index.js"
+  }
+}
