@@ -2,6 +2,8 @@ const fs = require("fs").promises;
 const { createCanvas, loadImage } = require("canvas");
 const { mainModule } = require("process");
 
+
+
 //done
 async function genHumans() {
   //const bodyFolder = "./assets/human_assets/body/";
@@ -94,11 +96,20 @@ async function genHumans() {
                                   canvas.height
                                 );
                                 /// render image1\\
-                                context.drawImage(image1, 0, 0, 32, 32);
-                                context.drawImage(image3, 7, 9, 16, 16);
+
+                                if (i === 0) {
+                                  context.drawImage(image1, 0, 0, 32, 32);
+                                }
+                                if (i === 1) {
+                                  context.drawImage(image1, 0, 1, 32, 32);
+                                }
+                                if (i === 2) {
+                                  context.drawImage(image1, 0, 0, 32, 32);
+                                }
 
                                 /// render image2\\
                                 if (j >= 0 && j <= 8) {
+                                  context.drawImage(image3, 7, 9, 16, 16);
                                   if (e === 0) {
                                     context.drawImage(image5, 0, 0, 0, 0);
                                   }
@@ -114,11 +125,12 @@ async function genHumans() {
                                   context.drawImage(image2, -1, 3, 32, 32);
                                 }
                                 if (j >= 9 && j <= 17) {
+                                  context.drawImage(image3, 7, 9, 16, 16);
                                   if (e === 0) {
                                     context.drawImage(image5, 0, 0, 0, 0);
                                   }
                                   if (e === 1) {
-                                    context.drawImage(image5, 15, 15, 16, 16);
+                                    context.drawImage(image5, 16, 15, 16, 16);
                                   }
                                   if (l === 0) {
                                     context.drawImage(image4, 0, 0, 0, 0);
@@ -127,14 +139,15 @@ async function genHumans() {
                                     context.drawImage(image4, 6, 12, 16, 16);
                                   }
 
-                                  context.drawImage(image2, -1, 3, 32, 32);
+                                  context.drawImage(image2, -2, 4, 32, 32);
                                 }
                                 if (j >= 18 && j <= 26) {
+                                  context.drawImage(image3, 7, 9, 16, 16);
                                   if (e === 0) {
                                     context.drawImage(image5, 0, 0, 0, 0);
                                   }
                                   if (e === 1) {
-                                    context.drawImage(image5, 15, 15, 16, 16);
+                                    context.drawImage(image5, 16, 15, 16, 16);
                                   }
                                   if (l === 0) {
                                     context.drawImage(image4, 0, 0, 0, 0);
@@ -142,7 +155,7 @@ async function genHumans() {
                                   if (l === 1) {
                                     context.drawImage(image4, 6, 12, 16, 16);
                                   }
-                                  context.drawImage(image2, 0, 0, 32, 16);
+                                  context.drawImage(image2, -1, -1, 32, 16);
                                 }
                                 const buffer = canvas.toBuffer();
                                 await fs.writeFile(
@@ -222,79 +235,14 @@ async function genApe() {
                               canvas.height
                             );
 
-                            context.drawImage(image1, 0, 0, 32, 32);
-
                             if (i >= 9 && i <= 17) {
-                              context.drawImage(image2, 6, 8, 16, 16);
-                              if (m === 0) {
-                                context.drawImage(image3, 6, 14, 16, 16);
+                              context.drawImage(image1, -1, -2, 32, 32);
+                              if (j === 0 || j === 1 || j === 2) {
+                                context.drawImage(image2, 5, 7, 16, 16);
                               }
-                              if (m === 1) {
-                                context.drawImage(image3, 5, 14, 16, 16);
+                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                                context.drawImage(image2, 5, 6, 16, 16);
                               }
-                              if (k === 0) {
-                                context.drawImage(banner, 0, 0, 0, 0);
-                              }
-                              if (k === 1) {
-                                context.drawImage(banner, 4, 15, 16, 16);
-                              }
-                              if (e === 1) {
-                                context.drawImage(image4, 15, 17, 16, 16);
-                              }
-                              if (e === 0) {
-                                context.drawImage(image4, 0, 0, 0, 0);
-                              }
-                              if (k === 2) {
-                                context.drawImage(banner, 4, 14, 16, 16);
-                              }
-                            }
-                            if (i >= 18 && i <= 26) {
-                              if (m === 0) {
-                                context.drawImage(image3, 6, 14, 16, 16);
-                              }
-                              if (m === 1) {
-                                context.drawImage(image3, 5, 14, 16, 16);
-                              }
-                              if (k === 1) {
-                                context.drawImage(banner, 4, 15, 16, 16);
-                              }
-                              if (e === 1) {
-                                context.drawImage(image4, 15, 17, 16, 16);
-                              }
-                              if (e === 0) {
-                                context.drawImage(image4, 0, 0, 0, 0);
-                              }
-                              if (k === 2) {
-                                context.drawImage(banner, 4, 14, 16, 16);
-                              }
-                              if (k === 0) {
-                                context.drawImage(banner, 0, 0, 0, 0);
-                              }
-                            } else if (i >= 27 && i <= 35) {
-                              context.drawImage(image2, 6, 8, 16, 16);
-                              if (m === 0) {
-                                context.drawImage(image3, 6, 13, 16, 16);
-                              }
-                              if (m === 1) {
-                                context.drawImage(image3, 5, 13, 16, 16);
-                              }
-                              if (k === 1) {
-                                context.drawImage(banner, 5, 14, 16, 16);
-                              }
-                              if (e === 1) {
-                                context.drawImage(image4, 15, 17, 16, 16);
-                              }
-                              if (e === 0) {
-                                context.drawImage(image4, 0, 0, 0, 0);
-                              }
-                              if (k === 2) {
-                                context.drawImage(banner, 5, 13, 16, 16);
-                              }
-                              if (k === 0) {
-                                context.drawImage(banner, 0, 0, 0, 0);
-                              }
-                            } else if (i >= 0 && i <= 8) {
-                              context.drawImage(image2, 5, 7, 16, 16);
                               if (m === 0) {
                                 context.drawImage(image3, 5, 12, 16, 16);
                               }
@@ -305,10 +253,101 @@ async function genApe() {
                                 context.drawImage(banner, 0, 0, 0, 0);
                               }
                               if (k === 1) {
-                                context.drawImage(banner, 4, 16, 16, 16);
+                                context.drawImage(banner, 3, 10, 16, 16);
                               }
                               if (e === 1) {
-                                context.drawImage(image4, 15, 15, 16, 16);
+                                context.drawImage(image4, 16, 10, 16, 16);
+                              }
+                              if (e === 0) {
+                                context.drawImage(image4, 0, 0, 0, 0);
+                              }
+                              if (k === 2) {
+                                context.drawImage(banner, 3, 12, 16, 16);
+                              }
+                            }
+                            if (i >= 18 && i <= 26) {
+                              context.drawImage(image1, 0, -2, 32, 32);
+                              if (j === 0 || j === 1 || j === 2) {
+                                context.drawImage(image2, 5, 7, 16, 16);
+                              }
+                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                                context.drawImage(image2, 5, 7, 16, 16);
+                              }
+                              if (m === 0) {
+                                context.drawImage(image3, 5, 12, 16, 16);
+                              }
+                              if (m === 1) {
+                                context.drawImage(image3, 4, 12, 16, 16);
+                              }
+                              if (k === 1) {
+                                context.drawImage(banner, 4, 10, 16, 16);
+                              }
+                              if (e === 1) {
+                                context.drawImage(image4, 17, 10, 16, 16);
+                              }
+                              if (e === 0) {
+                                context.drawImage(image4, 0, 0, 0, 0);
+                              }
+                              if (k === 2) {
+                                context.drawImage(banner, 4, 12, 16, 16);
+                              }
+                              if (k === 0) {
+                                context.drawImage(banner, 0, 0, 0, 0);
+                              }
+                            } else if (i >= 27 && i <= 35) {
+                              context.drawImage(image1, -1, -1, 32, 32);
+                              if (j === 0 || j === 1 || j === 2) {
+                                context.drawImage(image2, 5, 7, 16, 16);
+                              }
+                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                                context.drawImage(image2, 5, 6, 16, 16);
+                              }
+                              if (m === 0) {
+                                context.drawImage(image3, 5, 13, 16, 16);
+                              }
+                              if (m === 1) {
+                                context.drawImage(image3, 4, 13, 16, 16);
+                              }
+                              if (k === 1) {
+                                context.drawImage(banner, 4, 11, 16, 16);
+                              }
+                              if (e === 1) {
+                                context.drawImage(image4, 16, 11, 16, 16);
+                              }
+                              if (e === 0) {
+                                context.drawImage(image4, 0, 0, 0, 0);
+                              }
+                              if (k === 2) {
+                                context.drawImage(banner, 4, 12, 16, 16);
+                              }
+                              if (k === 0) {
+                                context.drawImage(banner, 0, 0, 0, 0);
+                              }
+                            } else if (i >= 0 && i <= 8) {
+                              context.drawImage(image1, 0, 0, 32, 32);
+                              if (j === 0 || j === 1 || j === 2) {
+                                context.drawImage(image2, 5, 7, 16, 16);
+                              }
+                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                                context.drawImage(image2, 5, 8, 16, 16);
+                              }
+                              if (m === 0) {
+                                context.drawImage(image3, 5, 12, 16, 16);
+                              }
+                              if (m === 1) {
+                                context.drawImage(image3, 4, 12, 16, 16);
+                              }
+                              if (k === 0) {
+                                context.drawImage(banner, 0, 0, 0, 0);
+                              }
+                              if (k === 1) {
+                                context.drawImage(banner, 4, 12, 16, 16);
+                              }
+                              if (k === 2) {
+                                context.drawImage(banner, 4, 12, 16, 16);
+                              }
+                              if (e === 1) {
+                                context.drawImage(image4, 17, 12, 16, 16);
                               }
                               if (e === 0) {
                                 context.drawImage(image4, 0, 0, 0, 0);
@@ -422,7 +461,7 @@ async function genCat() {
                                   context.drawImage(banner, 5, 14, 16, 16);
                                 }
                                 if (k === 2) {
-                                  context.drawImage(banner, 6, 15, 16, 16);
+                                  context.drawImage(banner, 6, 14, 16, 16);
                                 }
                                 if (s === 0) {
                                   context.drawImage(image4, 0, 0, 0, 0);
@@ -456,12 +495,12 @@ async function genCat() {
             );
           }
         });
-        //return(bodyarr);
       }
     });
   }
 }
 
+//donezou
 async function genDawg() {
   const headFolder = "./assets/dog_assets/hair/";
   const eyeFolder = "./assets/dog_assets/eye/";
@@ -513,10 +552,24 @@ async function genDawg() {
                               canvas.width,
                               canvas.height
                             );
-                            context.drawImage(image1, 0, 0, 32, 32);
 
                             if (i >= 0 && i <= 8) {
-                              context.drawImage(image2, -2, 5, 32, 16);
+                              //head 1
+                              context.drawImage(image1, 0, 0, 32, 32);
+                              if (
+                                j === 1 ||
+                                j === 2 ||
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
+                                context.drawImage(image2, -3, 5, 32, 16);
+                              } else if (j === 0) {
+                                context.drawImage(image2, -2, 5, 32, 16);
+                              }
                               if (t === 0) {
                                 context.drawImage(image5, 0, 0, 0, 0);
                               }
@@ -533,14 +586,29 @@ async function genDawg() {
                                 context.drawImage(banner, 0, 0, 0, 0);
                               }
                               if (k === 1) {
-                                context.drawImage(banner, 1, 14, 16, 16);
+                                context.drawImage(banner, 4, 14, 16, 16);
                               }
                               if (k === 2) {
-                                context.drawImage(banner, 2, 14, 16, 16);
+                                context.drawImage(banner, 1, 14, 16, 16);
                               }
                             }
                             if (i >= 9 && i <= 17) {
-                              context.drawImage(image2, -2, 5, 32, 16);
+                              //head 2
+                              context.drawImage(image1, -1, 0, 32, 32);
+                              if (
+                                j === 1 ||
+                                j === 2 ||
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
+                                context.drawImage(image2, -3, 5, 32, 16);
+                              } else if (j === 0) {
+                                context.drawImage(image2, -2, 5, 32, 16);
+                              }
                               if (t === 0) {
                                 context.drawImage(image5, 0, 0, 0, 0);
                               }
@@ -564,7 +632,22 @@ async function genDawg() {
                               }
                             }
                             if (i >= 18 && i <= 26) {
-                              context.drawImage(image2, -2, 5, 32, 16);
+                              //head 3
+                              context.drawImage(image1, -2, 0, 32, 32);
+                              if (
+                                j === 1 ||
+                                j === 2 ||
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
+                                context.drawImage(image2, -3, 5, 32, 16);
+                              } else if (j === 0) {
+                                context.drawImage(image2, -2, 5, 32, 16);
+                              }
                               if (t === 0) {
                                 context.drawImage(image5, 0, 0, 0, 0);
                               }
@@ -581,14 +664,29 @@ async function genDawg() {
                                 context.drawImage(banner, 0, 0, 0, 0);
                               }
                               if (k === 1) {
-                                context.drawImage(banner, 3, 19, 16, 16);
+                                context.drawImage(banner, 4, 14, 16, 16);
                               }
                               if (k === 2) {
-                                context.drawImage(banner, 3, 15, 16, 16);
+                                context.drawImage(banner, 1, 14, 16, 16);
                               }
                             }
                             if (i >= 27 && i <= 35) {
-                              context.drawImage(image2, -2, 5, 32, 16);
+                              //head 4
+                              context.drawImage(image1, 0, 0, 32, 32);
+                              if (
+                                j === 1 ||
+                                j === 2 ||
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
+                                context.drawImage(image2, -3, 5, 32, 16);
+                              } else if (j === 0) {
+                                context.drawImage(image2, -2, 5, 32, 16);
+                              }
                               if (t === 0) {
                                 context.drawImage(image5, 0, 0, 0, 0);
                               }
@@ -605,7 +703,7 @@ async function genDawg() {
                                 context.drawImage(banner, 0, 0, 0, 0);
                               }
                               if (k === 1) {
-                                context.drawImage(banner, 1, 12, 16, 16);
+                                context.drawImage(banner, 4, 12, 16, 16);
                               }
                               if (k === 2) {
                                 context.drawImage(banner, 1, 12, 16, 16);
@@ -634,5 +732,4 @@ async function genDawg() {
   }
 }
 
-
-genDawg();
+genApe();
