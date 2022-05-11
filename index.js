@@ -1,8 +1,8 @@
 const fs = require("fs").promises;
 const { createCanvas, loadImage } = require("canvas");
 const { mainModule } = require("process");
-
-
+const { imgDiff } = require("img-diff-js");
+const imageToBase64 = require("image-to-base64");
 
 //done
 async function genHumans() {
@@ -239,8 +239,14 @@ async function genApe() {
                               context.drawImage(image1, -1, -2, 32, 32);
                               if (j === 0 || j === 1 || j === 2) {
                                 context.drawImage(image2, 5, 7, 16, 16);
-                              }
-                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                              } else if (
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
                                 context.drawImage(image2, 5, 6, 16, 16);
                               }
                               if (m === 0) {
@@ -269,8 +275,14 @@ async function genApe() {
                               context.drawImage(image1, 0, -2, 32, 32);
                               if (j === 0 || j === 1 || j === 2) {
                                 context.drawImage(image2, 5, 7, 16, 16);
-                              }
-                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                              } else if (
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
                                 context.drawImage(image2, 5, 7, 16, 16);
                               }
                               if (m === 0) {
@@ -298,8 +310,14 @@ async function genApe() {
                               context.drawImage(image1, -1, -1, 32, 32);
                               if (j === 0 || j === 1 || j === 2) {
                                 context.drawImage(image2, 5, 7, 16, 16);
-                              }
-                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                              } else if (
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
                                 context.drawImage(image2, 5, 6, 16, 16);
                               }
                               if (m === 0) {
@@ -327,8 +345,14 @@ async function genApe() {
                               context.drawImage(image1, 0, 0, 32, 32);
                               if (j === 0 || j === 1 || j === 2) {
                                 context.drawImage(image2, 5, 7, 16, 16);
-                              }
-                              else if(j === 3 || j === 4 || j === 5 || j === 6 || j === 7 || j === 8){
+                              } else if (
+                                j === 3 ||
+                                j === 4 ||
+                                j === 5 ||
+                                j === 6 ||
+                                j === 7 ||
+                                j === 8
+                              ) {
                                 context.drawImage(image2, 5, 8, 16, 16);
                               }
                               if (m === 0) {
@@ -732,4 +756,62 @@ async function genDawg() {
   }
 }
 
-genApe();
+// genApe();
+
+async function diffChecker() {
+  // const imagePaths = "./generated/apes/"; 0 iguais
+  // const imagePaths = "./generated/cats/"; 0 iguais
+  // const imagePaths = "./generated/dawg/"; 0 iguais
+  const imagePaths = "./generated/humans/"; // 0 iguais
+  var images = [];
+  var results = [];
+  var answers;
+  try {
+    const files = await fs.readdir(imagePaths);
+    for (const file of files) {
+      images.push(file);
+    }
+
+    // const diff = await fs.readdir(imagediffPath);
+    // for (const file of diff) {
+    //   imagediff.push(file);
+    // }
+
+    for(let i =0 ; i < images.length-1; i++) {
+      await imageToBase64(`${imagePaths}${images[i]}`) // Image URL
+        .then((response1) => {
+           imageToBase64(`${imagePaths}${images[i+1]}`) // Image URL
+            .then((response2) => {
+              if (response1 === response2) {
+                answers = "Equals";
+              } else if (response1 !== response2) {
+                answers = "Not Equals";
+              }
+              results.push(answers);
+            })
+            .catch((error) => {
+              console.log(error); // Logs an error if there was one
+            }); // "iVBORw0KGgoAAAANSwCAIA..."
+        })
+        .catch((error) => {
+          console.log(error); // Logs an error if there was one
+        });
+    }
+
+    const found = results.find(element => element === "Equals");
+    
+    if(typeof found === "undefined"){
+      console.log("0 Equals");
+      console.log(found);
+    }
+    else{
+      console.log("At least one found");
+      console.log(found);
+    }
+   
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+diffChecker();
