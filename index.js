@@ -765,6 +765,7 @@ async function diffChecker() {
   const imagePaths = "./generated/humans/"; // 0 iguais
   var images = [];
   var results = [];
+  var equals = [];
   var answers;
   try {
     const files = await fs.readdir(imagePaths);
@@ -784,6 +785,7 @@ async function diffChecker() {
             .then((response2) => {
               if (response1 === response2) {
                 answers = "Equals";
+                equals.push(i);
               } else if (response1 !== response2) {
                 answers = "Not Equals";
               }
