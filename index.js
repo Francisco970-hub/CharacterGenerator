@@ -759,61 +759,93 @@ async function genDawg() {
 // genApe();
 
 async function diffChecker() {
-  // const imagePaths = "./generated/apes/"; 0 iguais
-  // const imagePaths = "./generated/cats/"; 0 iguais
-  // const imagePaths = "./generated/dawg/"; 0 iguais
-  const imagePaths = "./generated/humans/"; // 0 iguais
+  const apePath = "./generated/apes/";
+  const catsPath = "./generated/cats/";
+  const dawgPath = "./generated/dawg/";
+  const humansPath = "./generated/humans/"; //
+  const imagePaths = [humansPath, apePath, catsPath, dawgPath];
+  var harr = [];
+  var aarr = [];
+  var carr = [];
+  var darr = [];
+  const arrs = [harr, aarr, carr, darr];
+
   var images = [];
-  var results = [];
   var equals = [];
   var answers;
   try {
-    const files = await fs.readdir(imagePaths);
-    for (const file of files) {
-      images.push(file);
+
+    for (let index = 0; index < imagePaths.length; index++) {
+      const files = await fs.readdir(imagePaths[index]);
+      for (const file of files) {
+        arrs[index].push(file);
+      }
     }
 
-    // const diff = await fs.readdir(imagediffPath);
-    // for (const file of diff) {
-    //   imagediff.push(file);
-    // }
+    for(let img = 0; img < arrs.length; img++){
+      var results = [];
+      for (let i = 0; i < arrs[img].length - 1; i++) {
+        await imageToBase64(`${imagePaths[img]}${arrs[img][i]}`) 
+          .then((response1) => {
+            imageToBase64(`${imagePaths[img]}${arrs[img][i+1]}`) 
+              .then((response2) => {
+                if (response1 === response2) {
+                  answers = "Equals";
+                  equals.push(i);
+                } else if (response1 !== response2) {
+                  answers = "Not Equals";
+                }
+                results.push(answers);
+              })
+              .catch((error) => {
+                console.log(error); 
+              }); 
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
 
-    for(let i =0 ; i < images.length-1; i++) {
-      await imageToBase64(`${imagePaths}${images[i]}`) // Image URL
-        .then((response1) => {
-           imageToBase64(`${imagePaths}${images[i+1]}`) // Image URL
-            .then((response2) => {
-              if (response1 === response2) {
-                answers = "Equals";
-                equals.push(i);
-              } else if (response1 !== response2) {
-                answers = "Not Equals";
-              }
-              results.push(answers);
-            })
-            .catch((error) => {
-              console.log(error); // Logs an error if there was one
-            }); // "iVBORw0KGgoAAAANSwCAIA..."
-        })
-        .catch((error) => {
-          console.log(error); // Logs an error if there was one
-        });
+      const found = results.find((element) => element === "Equals");
+      console.log(imagePaths[img]);
+      if (typeof found === "undefined") {
+        console.log("0 Equals");
+        console.log(found);
+      } else {
+        console.log("At least one found");
+        console.log(found);
+      }
     }
-
-    const found = results.find(element => element === "Equals");
-    
-    if(typeof found === "undefined"){
-      console.log("0 Equals");
-      console.log(found);
-    }
-    else{
-      console.log("At least one found");
-      console.log(found);
-    }
-   
   } catch (err) {
     console.log(err);
   }
 }
 
-diffChecker();
+// diffChecker();
+
+async function Main() {
+  console.log("Starting humans");
+
+  await genHumans();
+
+  console.log("Ending humans");
+  console.log("Starting Apes");
+
+  await genApe();
+
+  console.log("Ending Apes");
+  console.log("Starting Cats");
+
+  await genCat();
+
+  console.log("Ending Cats");
+  console.log("Starting Dawgs");
+
+  await genDawg();
+
+  console.log("Ending Dawgs");
+
+  await diffChecker();
+}
+
+Main();
